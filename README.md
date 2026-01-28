@@ -7,7 +7,7 @@
 
 ---
 
-<h2>🚀 Getting Started</h2>
+<h2>🚀 Getting started</h2>
 
 <p>To launch the task, simply open the <b>`index.html`</b> file located in either the <b>`offline`</b> or <b>`online`</b> folder.</p>
 
@@ -16,7 +16,7 @@
 | **`offline`** | Subject and session numbers can be customized upon startup. | Local testing, lab settings. |
 | **`online`** | A 15-character long random subject ID is automatically generated. | Online data collection. |
 
-### Browser Requirements
+### Browser requirements
 
 <p>The task is compatible with most modern browsers. <b>Chrome is recommended</b>.</p>
 
@@ -24,7 +24,7 @@
 
 ---
 
-<h2>🧠 Task Structure and Procedure</h2>
+<h2>🧠 Task structure and procedure</h2>
 
 <p>In this task, single letters are presented consecutively on the screen. Participants are required to press the "J" key for target elements and the "F" key for non-target elements. The definition of a target stimulus varies depending on the N-back level.</p>
 
@@ -40,9 +40,9 @@
 
 ---
 
-<h2>⚙️ Task Levels and Stimuli</h2>
+<h2>⚙️ Task levels and stimuli</h2>
 
-### The N-back Levels
+### The N-back levels
 
 <p>The task level is controlled by the <b>`level`</b> variable, configurable in <b>`parameters.js`</b>. Available levels are 0-back, 1-back, 2-back, and 3-back.</p>
 
@@ -53,7 +53,7 @@
 <li><b>3-back:</b> The target is any letter that is the same as the letter presented 3 trials earlier ($n=n-3$).</li>
 </ul>
 
-### Stimulus Parameters
+### Stimulus parameters
 
 <p>Ten phonologically distinct letters are used as stimuli: B, K, Q, T, H, M, N, P, X, R. The stimuli are presented in a fixed pseudo-random order.</p>
 
@@ -71,32 +71,32 @@ Example for stimulus presentation in the 2-back task.
 
 ---
 
-<h2>💾 Output File Data</h2>
+<h2>💾 Output file data</h2>
 
 <p>After the task concludes, a .csv output file containing trial-by-trial data and descriptive statistics is saved to the local machine.</p>
 
-### Trial-Level Data Columns
+### Trial-level data columns
 
 | Variable | Description |
 | :--- | :--- |
 | **`subject`** | 15-char random ID (online) or custom number (offline). |
 | **`session`** | Custom session number (offline version only). |
 | **`rt`** | Reaction time (in ms). |
-| **`test\_part`** | The part of the task (e.g., fixation, test, feedback, debrief). |
-| **`correct\_response`** | The expected key press ("j" or "f"). |
+| **`test_part`** | The part of the task (e.g., fixation, test, feedback, debrief). |
+| **`correct_response`** | The expected key press ("j" or "f"). |
 | **`block`** | The block number (0: practice, 1: first block, 2: second block). |
-| **`trial\_number`** | The trial number within the block. |
+| **`trial_number`** | The trial number within the block. |
 | **`target`** | Whether the stimulus was a target (Boolean). |
 | **`letter`** | The letter presented. |
 | **`hit`** | Target correctly identified as target (1 = Yes, 0 = No). |
 | **`miss`** | Target incorrectly identified as non-target (1 = Yes, 0 = No). |
-| **`false\_alarm`** | Non-target incorrectly identified as target (1 = Yes, 0 = No). |
-| **`correct\_rejection`** | Non-target correctly identified as non-target (1 = Yes, 0 = No). |
+| **`false_alarm`** | Non-target incorrectly identified as target (1 = Yes, 0 = No). |
+| **`correct_rejection`** | Non-target correctly identified as non-target (1 = Yes, 0 = No). |
 | *Other jsPsych:* | `success`, `trial\_type`, `trial\_index`, `time\_elapsed`, `internal\_code\_id`, `browser\_events`, `view\_history`, `stimulus`, `key\_press`. |
 
-### Summary Statistics (STAT\_ Columns)
+### Summary statistics (STAT Columns)
 
-<p>Columns prefixed with `STAT\_` provide descriptive statistics, excluding practice trials.</p>
+<p>Columns prefixed with STAT provide descriptive statistics, excluding practice trials.</p>
 
 | Statistic Variable | Description |
 | :--- | :--- |
@@ -116,16 +116,16 @@ Example for stimulus presentation in the 2-back task.
 
 ---
 
-<h2>⚙️ Setting Options</h2>
+<h2>⚙️ Setting options</h2>
 
 <p>The following key experimental parameters can be adjusted by modifying the `parameters.js` file:</p>
 
 <ul>
-<li>`level` Sets the N-back difficulty (0, 1, 2, or 3).</li>
-<li>`trial_duration`: Presentation time of the fixation cross.</li>
-<li>`stimulus_duration`: Presentation time of the letters.</li>
-<li>`feedback_duration`: Presentation time of feedback during the practice block.</li>
-<li>`language`: Sets the program language (available: `english (en)`, `hungarian (hu)`).</li>
+<li>level: Sets the N-back difficulty (0, 1, 2, or 3).</li>
+<li>trial_duration: Presentation time of the fixation cross.</li>
+<li>stimulus_duration: Presentation time of the letters.</li>
+<li>feedback_duration: Presentation time of feedback during the practice block.</li>
+<li>language: Sets the program language (available: `english (en)`, `hungarian (hu)`).</li>
 </ul>
 
 ---
