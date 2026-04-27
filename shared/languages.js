@@ -19,7 +19,7 @@ const en = {
         letter: "In this task, <strong>letters</strong> will appear on the screen consecutively.",
         yourTask1: "Your task will be <strong>to press the key 'J' if the letter on the screen is the same as <strong style='color:red'>two</strong> letters earlier</strong>.",
         yourTask2: "Otherwise, press the <strong>key 'F'</strong>.",
-        image: "<img src='../static/images/instruction_2back_en.gif' />"
+        image: "<img src='https://jonaragogna.github.io/Nback_jsPsych/static/images/instruction_2back_en.gif' />"
     },
     instructions3back: {
         letter: "In this task, <strong>letters</strong> will appear on the screen consecutively.",
