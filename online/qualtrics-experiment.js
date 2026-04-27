@@ -33,30 +33,8 @@ const instructions = {
   ],
   show_clickable_nav: true,
   button_label_next: language.button.next,
-  button_label_previous: language.button.previous,
-  allow_keys: false,
-  page_label: "Page",
-  on_load: function() {
-    // Disable the Next button for 7 seconds on the main instructions page (page 2)
-    var currentPage = jsPsych.currentTrial().pages.length > 1 ? jsPsych.data.get().last(1).values()[0] : null;
-    var nextButton = document.querySelector('#jspsych-instructions-next');
-    if (nextButton) {
-      nextButton.disabled = true;
-      nextButton.style.opacity = '0.4';
-      var seconds = 7;
-      var originalText = nextButton.innerHTML;
-      var countdown = setInterval(function() {
-        nextButton.innerHTML = originalText + ' (' + seconds + ')';
-        seconds--;
-        if (seconds < 0) {
-          clearInterval(countdown);
-          nextButton.disabled = false;
-          nextButton.style.opacity = '1';
-          nextButton.innerHTML = originalText;
-        }
-      }, 1000);
-    }
-  }
+  button_label_previous: language.button.previous
+}
 }
 setArrays()
 
@@ -184,7 +162,15 @@ const debriefBlock = {
 };
 
 jsPsych.data.addProperties({subject: subjectId});
-timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
+
+const forcedWait = {
+  type: "html-keyboard-response",
+  stimulus: '<p style="font-size: 22px;">Please take a moment to make sure you understand the task.</p><p style="font-size: 22px;">The practice will begin in a few seconds.</p>',
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 7000
+};
+
+timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, forcedWait, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
 
 /*************** QUALTRICS-SPECIFIC INITIALIZATION ***************/
 
