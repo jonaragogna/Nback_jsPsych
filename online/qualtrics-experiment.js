@@ -163,14 +163,7 @@ const debriefBlock = {
 
 jsPsych.data.addProperties({subject: subjectId});
 
-const forcedWait = {
-  type: "html-keyboard-response",
-  stimulus: '<p style="font-size: 22px;">Please take a moment to make sure you understand the task.</p><p style="font-size: 22px;">The practice will begin in a few seconds.</p>',
-  choices: jsPsych.NO_KEYS,
-  trial_duration: 7000
-};
-
-timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, forcedWait, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
+timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
 
 /*************** QUALTRICS-SPECIFIC INITIALIZATION ***************/
 
