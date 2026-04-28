@@ -165,30 +165,40 @@ const debriefBlock = {
   on_finish: function(trial) { statCalculation(trial) }
 };
 
-const forcedWait = {
-  type: "html-keyboard-response",
-  stimulus: function() {
-    return '<div style="font-size: 24px; padding: 40px;"><p>Please take a moment to make sure you understand the task.</p><p>The practice will begin in <span id="countdown">7</span> seconds.</p></div>';
-  },
-  choices: jsPsych.NO_KEYS,
-  trial_duration: 7000,
+const instructions = {
+  type: "instructions",
+  pages: [
+      `<h1>${language.welcomePage.welcome}</h1><br><p>${language.welcomePage.clickNext}</p>`,
+      `<p>${instruction.letter}</p><p>${instruction.yourTask1}</p><p>${instruction.yourTask2}</p><p>${language.generalInstruction.fastAndAccurate}</p>${instruction.image}<p>${language.generalInstruction.clickNext}</p>`
+  ],
+  show_clickable_nav: true,
+  button_label_next: language.button.next,
+  button_label_previous: language.button.previous,
   on_load: function() {
+    var nextButton = document.querySelector('#jspsych-instructions-next');
+    if (!nextButton) return;
+    var originalText = nextButton.innerHTML;
     var seconds = 7;
-    var countdownInterval = setInterval(function() {
+    nextButton.disabled = true;
+    nextButton.style.opacity = '0.4';
+    nextButton.style.cursor = 'not-allowed';
+    nextButton.innerHTML = originalText + ' (' + seconds + ')';
+    var countdown = setInterval(function() {
       seconds--;
-      var countdownElement = document.getElementById('countdown');
-      if (countdownElement) {
-        countdownElement.innerHTML = seconds;
-      }
-      if (seconds <= 0) {
-        clearInterval(countdownInterval);
+      if (seconds > 0) {
+        nextButton.innerHTML = originalText + ' (' + seconds + ')';
+      } else {
+        clearInterval(countdown);
+        nextButton.disabled = false;
+        nextButton.style.opacity = '1';
+        nextButton.style.cursor = 'pointer';
+        nextButton.innerHTML = originalText;
       }
     }, 1000);
   }
-};
-jsPsych.data.addProperties({subject: subjectId});
+}
 
-timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, forcedWait, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
+timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
 /*************** QUALTRICS-SPECIFIC INITIALIZATION ***************/
 
 jsPsych.init({
