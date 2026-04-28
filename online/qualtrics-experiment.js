@@ -35,7 +35,11 @@ const instructions = {
   button_label_next: language.button.next,
   button_label_previous: language.button.previous
 }
-}
+const betweenBlockRest = {... trialStructure, stimulus: `<p>${language.betweenBlocks.rest}</p><p>${language.betweenBlocks.pressKey}</p>` };
+const ready = {... trialStructure, stimulus: `<p>${language.betweenBlocks.continue}</p>` };
+const startPractice = {... trialStructure, stimulus: `<p>${language.practice.practice}</p><p>${language.practice.startPractice}<p>`}
+const afterPractice = {... trialStructure, stimulus: `<h2>${language.practice.end}</h2><p>${language.task.start}</p><p>${language.task.press}<p>` };
+
 setArrays()
 
 if (level === 0) {
