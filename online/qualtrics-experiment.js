@@ -165,10 +165,30 @@ const debriefBlock = {
   on_finish: function(trial) { statCalculation(trial) }
 };
 
+const forcedWait = {
+  type: "html-keyboard-response",
+  stimulus: function() {
+    return '<div style="font-size: 24px; padding: 40px;"><p>Please take a moment to make sure you understand the task.</p><p>The practice will begin in <span id="countdown">7</span> seconds.</p></div>';
+  },
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 7000,
+  on_load: function() {
+    var seconds = 7;
+    var countdownInterval = setInterval(function() {
+      seconds--;
+      var countdownElement = document.getElementById('countdown');
+      if (countdownElement) {
+        countdownElement.innerHTML = seconds;
+      }
+      if (seconds <= 0) {
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
+  }
+};
 jsPsych.data.addProperties({subject: subjectId});
 
-timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
-
+timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, forcedWait, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
 /*************** QUALTRICS-SPECIFIC INITIALIZATION ***************/
 
 jsPsych.init({
