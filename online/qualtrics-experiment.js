@@ -165,39 +165,6 @@ const debriefBlock = {
   on_finish: function(trial) { statCalculation(trial) }
 };
 
-const instructions = {
-  type: "instructions",
-  pages: [
-      `<h1>${language.welcomePage.welcome}</h1><br><p>${language.welcomePage.clickNext}</p>`,
-      `<p>${instruction.letter}</p><p>${instruction.yourTask1}</p><p>${instruction.yourTask2}</p><p>${language.generalInstruction.fastAndAccurate}</p>${instruction.image}<p>${language.generalInstruction.clickNext}</p>`
-  ],
-  show_clickable_nav: true,
-  button_label_next: language.button.next,
-  button_label_previous: language.button.previous,
-  on_load: function() {
-    var nextButton = document.querySelector('#jspsych-instructions-next');
-    if (!nextButton) return;
-    var originalText = nextButton.innerHTML;
-    var seconds = 7;
-    nextButton.disabled = true;
-    nextButton.style.opacity = '0.4';
-    nextButton.style.cursor = 'not-allowed';
-    nextButton.innerHTML = originalText + ' (' + seconds + ')';
-    var countdown = setInterval(function() {
-      seconds--;
-      if (seconds > 0) {
-        nextButton.innerHTML = originalText + ' (' + seconds + ')';
-      } else {
-        clearInterval(countdown);
-        nextButton.disabled = false;
-        nextButton.style.opacity = '1';
-        nextButton.style.cursor = 'pointer';
-        nextButton.innerHTML = originalText;
-      }
-    }, 1000);
-  }
-}
-
 timeline.push({type: "fullscreen", fullscreen_mode: true}, instructions, startPractice, practice, afterPractice, firstBlock, betweenBlockRest, ready, secondBlock, debriefBlock, {type: "fullscreen", fullscreen_mode: false});
 /*************** QUALTRICS-SPECIFIC INITIALIZATION ***************/
 
